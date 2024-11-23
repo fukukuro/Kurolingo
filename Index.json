@@ -1,6 +1,7 @@
 {
 "Purpose":"Index",
 "Index":{
-    "QuestionIndex":"Address"
+    "ProblemsIndex":"/ProblemsIndex.json",
+    "ProblemsFolder":"/Problems/"
 }
 }
