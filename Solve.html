@@ -8,11 +8,112 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div id="LoadingMSG">
-            Ajax通信で問題を読み込んでいます。しばらくお待ち下さい。
-        </div>
-        <div id="LoadingState">...</div>
+        <div id="title">問題</div>
+        <div id="ProblemDisp">問題文</div>
+        <canvas id="canvas" width="500" height="100"></canvas>
+        <div id="Correct">模範解答</div>
+        <br>
+        <button id="AnswerDisp" onclick="ShowAns()">答えを見る</button>
+        <button id="Next" onclick="ProblemGUIReady()">次へ</button>
+        <style>
+            #title{
+                font-size:2rem;
+            }
+            #ProblemDisp{
+                font-size:1rem;
+            }
+            #canvas{
+                border:2px solid #000000;
+                border-radius:7px;
+            }
+            #Correct{
+                font-size:1rem;
+            }
+            #AnswerDisp{
+                width:25vw;
+                height: 10vh;
+                background-color: whitesmoke;
+            }
+            #Next{
+                width:25vw;
+                height: 10vh;
+                background-color: whitesmoke;
+            }
+        </style>
         <script>
+            const canvas = document.getElementById("canvas");
+            const context = canvas.getContext("2d");
+            const clearButton = document.getElementById("clear");
+            let isDragging = false;
+            let lastPosition = { x: null, y: null };
+            function draw(x, y) {
+            if (!isDragging) {
+                return;
+            }
+            context.lineCap = "round";
+            context.lineWidth = 3;
+            context.strokeStyle = "black";
+            if (lastPosition.x === null || lastPosition.y === null) {
+                context.moveTo(x, y);
+            } else {
+                context.moveTo(lastPosition.x, lastPosition.y);
+            }
+            context.lineTo(x, y);
+            context.stroke();
+            lastPosition.x = x;
+            lastPosition.y = y;
+            }
+            function dragStart(event) {
+            context.beginPath();
+            isDragging = true;
+            }
+            function dragEnd(event) {
+            context.closePath();
+            isDragging = false;
+            lastPosition.x = null;
+            lastPosition.y = null;
+            }
+            function clear() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            function init() {
+            canvas.addEventListener("mousedown", dragStart);
+            canvas.addEventListener("mouseup", dragEnd);
+            canvas.addEventListener("mouseout", dragEnd);
+            canvas.addEventListener("mousemove", (e) => {
+                draw(
+                e.layerX - canvas.getBoundingClientRect().left,
+                e.layerY - canvas.getBoundingClientRect().top
+                );
+            });
+            canvas.addEventListener("touchstart", dragStart);
+            canvas.addEventListener("touchcancel", dragEnd);
+            canvas.addEventListener("touchend", dragEnd);
+            canvas.addEventListener("touchmove", (e) => {
+                e.preventDefault();
+
+                let x = e.touches[0].clientX - canvas.getBoundingClientRect().left;
+                let y = e.touches[0].clientY - canvas.getBoundingClientRect().top;
+
+                draw(x, y);
+            });
+            }
+            init();
+            let NowQuestionNumber = -1;
+            function ProblemGUIReady(){
+                NowQuestionNumber = NowQuestionNumber + 1;
+                document.getElementById("Next").hidden = true;
+                document.getElementById("AnswerDisp").hidden = false;
+                document.getElementById("Correct").hidden = true;
+                document.getElementById("Correct").innerText = ApplicationIndex.Problems[NowQuestionNumber].Answer[0].Answer+ApplicationIndex.Problems[NowQuestionNumber].Answer[0].Unit;
+                document.getElementById("ProblemDisp").innerText = ApplicationIndex.Problems[NowQuestionNumber].Sentence;
+            }
+            function ShowAns(){
+                document.getElementById("AnswerDisp").hidden = true;
+                document.getElementById("Correct").hidden = false;
+                document.getElementById("Next").hidden = false;
+                document.getElementById() 
+            }
             let url = new URL(window.location.href);
             let params = url.searchParams;
             ProblesSetID = params.get('ProblemsSetID');
@@ -21,7 +122,8 @@
             .then((data) => data.json())
             .then((res) => {
                 ApplicationIndex = res;
-                console.log(ApplicationIndex);
+                console.log(ApplicationIndex.Problems);
+                ProblemGUIReady(0);
             });
         </script>
     </body>
