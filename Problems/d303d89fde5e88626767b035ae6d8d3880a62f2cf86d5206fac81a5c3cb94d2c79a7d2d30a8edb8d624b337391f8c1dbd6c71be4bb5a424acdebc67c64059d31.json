@@ -1,0 +1,21 @@
+{
+    "ID":"d303d89fde5e88626767b035ae6d8d3880a62f2cf86d5206fac81a5c3cb94d2c79a7d2d30a8edb8d624b337391f8c1dbd6c71be4bb5a424acdebc67c64059d31",
+    "Problems":
+        [{"Sentence":"チョウは何目か。","Answer":[{"Answer":"鱗翅","Unit":"目"}]},
+        {"Sentence":"ガは何目か。","Answer":[{"Answer":"鱗翅","Unit":"目"}]},
+        {"Sentence":"カブトムシは何目か。","Answer":[{"Answer":"甲虫","Unit":"目"}]},
+        {"Sentence":"クワガタは何目か。","Answer":[{"Answer":"甲虫","Unit":"目"}]},
+        {"Sentence":"アリは何目か。","Answer":[{"Answer":"膜翅","Unit":"目"}]},
+        {"Sentence":"ハチは何目か。","Answer":[{"Answer":"膜翅","Unit":"目"}]},
+        {"Sentence":"カは何目か。","Answer":[{"Answer":"双翅","Unit":"目"}]},
+        {"Sentence":"アブは何目か。","Answer":[{"Answer":"双翅","Unit":"目"}]},
+        {"Sentence":"ハエは何目か。","Answer":[{"Answer":"双翅","Unit":"目"}]},
+        {"Sentence":"ノミは何目か。","Answer":[{"Answer":"ノミ","Unit":"目"}]},
+        {"Sentence":"カマキリは何目か。","Answer":[{"Answer":"カマキリ","Unit":"目"}]},
+        {"Sentence":"バッタは何目か。","Answer":[{"Answer":"直翅","Unit":"目"}]},
+        {"Sentence":"コウロギは何目か。","Answer":[{"Answer":"直翅","Unit":"目"}]},
+        {"Sentence":"セミは何目か。","Answer":[{"Answer":"半翅","Unit":"目"}]},
+        {"Sentence":"カメムシは何目か。","Answer":[{"Answer":"半翅","Unit":"目"}]},
+        {"Sentence":"アメンボは何目か。","Answer":[{"Answer":"半翅","Unit":"目"}]},
+        {"Sentence":"トンボは何目か。","Answer":[{"Answer":"トンボ","Unit":"目"}]}]
+}

@@ -13,7 +13,16 @@
         </div>
         <div id="LoadingState">...</div>
         <script>
-            const ApplicationIndex = (await fetch("https://fukukuro.github.io/Kurolingo/Index.json")).json();
+            let url = new URL(window.location.href);
+            let params = url.searchParams;
+            ProblesSetID = params.get('ProblemsSetID');
+            let ApplicationIndex = {};
+            fetch("https://fukukuro.github.io/Kurolingo/Problems/"+ProblesSetID+".json")
+            .then((data) => data.json())
+            .then((res) => {
+                ApplicationIndex = res;
+                console.log(ApplicationIndex);
+            });
         </script>
     </body>
 </html>
