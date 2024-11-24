@@ -1,6 +1,7 @@
 {
 "Purpose":"Index",
 "Index":{
+    "Root":"https://fukukuro.github.io/Kurolingo",
     "ProblemsIndex":"/ProblemsIndex.json",
     "ProblemsFolder":"/Problems/"
 }

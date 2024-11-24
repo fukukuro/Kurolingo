@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title id="Title"></title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="LoadingMSG">
+            Ajax通信で問題を読み込んでいます。しばらくお待ち下さい。
+        </div>
+        <div id="LoadingState">...</div>
+        <script>
+            const ApplicationIndex = (await fetch("https://fukukuro.github.io/Kurolingo/Index.json")).json();
+            const ProblemsIndex = (await fetch(ApplicationIndex[[PromiseResult]].Index.Root+ApplicationIndex[[PromiseResult]].Index.ProblemsIndex)).json();
+        </script>
+    </body>
+</html>
