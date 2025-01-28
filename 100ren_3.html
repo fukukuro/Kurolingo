@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,9 +13,12 @@
             ちなみに、このアプリはスマホ専用です。<br>
             パソコン/タブレットで表示しても、<br>
             レイアウトが崩れてうまく使えません。<br>
-            Ver.1.0.5
+            Ver.1.0.6
         </div>
         <main id="Main" hidden>
+        <div id="QNArea">
+        <input id="QuestionNumber" type="number" onchange="EventNumberChange()" onfocus="focus_Textarea()">
+        <button id="Kakutei" onclick="blur_Textarea()">確定</button></div>
         <button id="MainElement" onclick="FlipCard()">12345 6789012 34567 8901234 5678901</button>
         <button id="prev" onclick="Prev()">前へ</button>
         <button id="next" onclick="Next()">次へ</button>
@@ -125,10 +128,12 @@
             setTimeout(() => {
                 document.getElementById("Main").hidden = false;
                 document.getElementById("Splash").hidden = true;
-            }, 3000);
-            const MainElement = document.getElementById("MainElement")
+            }, 1000);
+            const MainElement = document.getElementById("MainElement");
+            const QuestionNumberElement = document.getElementById("QuestionNumber");
             let Omote = true;
             let NowNumber = 0;
+            let LastQuestionNumberElementValue = 1;
             function FlipCard(){
                 if(Omote == true){
                     Omote = false;
@@ -147,6 +152,17 @@
             function UpdateCard(){
                 Omote = true;
                 MainElement.innerText = HyakuninIsshu[NowNumber][0];
+                QuestionNumberElement.value = NowNumber + 1;
+            }
+            function EventNumberChange(){
+                if(QuestionNumberElement.value <= 100 && QuestionNumberElement.value >= 1){
+                    NowNumber = QuestionNumberElement.value - 1;
+                    LastQuestionNumberElementValue = QuestionNumberElement.value;
+                    UpdateCard()
+                }
+                else{
+                    QuestionNumberElement.value = LastQuestionNumberElementValue;
+                }
             }
             function Next(){
                 if(NowNumber == 99){
@@ -167,6 +183,12 @@
                     NowNumber -= 1;
                     UpdateCard()
                 }
+            }
+            function focus_Textarea(){
+                document.getElementById("Kakutei").style.color = "white";
+            }
+            function blur_Textarea(){
+                document.getElementById("Kakutei").style.color = "black";
             }
             UpdateCard()
         </script>
@@ -217,6 +239,40 @@
             }
             #Loading{
                 font-size: 80px;
+            }
+            #QuestionNumber::-webkit-inner-spin-button,
+            #QuestionNumber::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+                -moz-appearance:textfield;
+                appearance: none;
+            }
+            #QuestionNumber{
+                width: 20vw;
+                margin-left:40vw;
+                padding: 0vw;
+                font-size:80px;
+                background-color: black;
+                color: white;
+                border-style: none;
+                border-color: transparent;
+                text-align: center;
+            }
+            #QuestionNumber:focus{
+                outline-color: transparent;
+                outline-style: none;
+            }
+            #Kakutei{
+                width: 20vw;
+                margin-right:20vw;
+                font-size:80px;
+                background-color: black;
+                color: black;
+                border-style: none;
+                padding: 0vw;
+            }
+            #QNArea{
+                display: flex;
             }
         </style>
     </body>
