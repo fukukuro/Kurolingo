@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="Splash">
+            <div id="Loading">読み込み中...</div>
+            アプリの製作者:CoffeeOwl;<br>
+            無断で他人にアプリをコピーしないでください。;
+        </div>
+        <main id="Main">
+        走れメロス暗記
+        <button id="MainElement" onclick="FlipCard()"></button>
+        <button id="prev" onclick="Prev()">前へ</button>
+        <button id="next" onclick="Next()">次へ</button>
+        </main>
+        <style>
+                    body{
+                        background-color: black;
+                    }
+        </style>
+        <style>
+            body{
+                background-color: black;
+                font-family: "M PLUS 1", serif;
+                font-size:80px;
+                text-align: center;
+                color: white;
+            }
+            #MainElement{
+                width: 100vw;
+                height:50vh;
+                margin: 0px;
+                padding: 5vw;
+                font-size:50px;
+                background-color: black;
+                color: white;
+                border-style: none;
+            }
+            #prev{
+                width:40vw;
+                margin: 0px;
+                padding: 5vw;
+                font-size:80px;
+                background-color: black;
+                color: white;
+                border-style: none;
+            }
+            #next{
+                width: 40vw;
+                margin: 0px;
+                padding: 5vw;
+                font-size:80px;
+                background-color: black;
+                color: white;
+                border-style: none;
+            }
+            #FLD_ALL{
+                color:white;
+            }
+            #Splash{
+                width: 100vw;
+                height: 60vh;
+                color:white;
+                font-size:40px;
+                padding-top: 40vh;
+            }
+            #Loading{
+                font-size: 80px;
+            }
+        </style>
+        <script>
+        document.getElementById("Splash").hidden = false;
+                    setTimeout(() => {
+                        document.getElementById("Main").hidden = false;
+                        document.getElementById("Splash").hidden = true;
+                    }, 3000);
+        //alert("タイムアウト処理完了");
+        const orgstr = `　メロスは激怒した。必ず、かの邪智暴虐じゃちぼうぎゃくの王を除かなければならぬと決意した。メロスには政治がわからぬ。メロスは、村の牧人である。笛を吹き、羊と遊んで暮して来た。けれども邪悪に対しては、人一倍に敏感であった。きょう未明メロスは村を出発し、野を越え山越え、十里はなれた此このシラクスの市にやって来た。メロスには父も、母も無い。女房も無い。十六の、内気な妹と二人暮しだ。この妹は、村の或る律気な一牧人を、近々、花婿はなむことして迎える事になっていた。結婚式も間近かなのである。メロスは、それゆえ、花嫁の衣裳やら祝宴の御馳走やらを買いに、はるばる市にやって来たのだ。先ず、その品々を買い集め、それから都の大路をぶらぶら歩いた。メロスには竹馬の友があった。セリヌンティウスである。今は此のシラクスの市で、石工をしている。その友を、これから訪ねてみるつもりなのだ。`;
+        //alert("文章読み込み完了、");
+
+        let count = -1;
+        const strarray = orgstr.split("。");
+        function Scroller(){
+            const element = document.getElementById('next');
+            const targetDOMRect = element.getBoundingClientRect();
+            const targetTop = targetDOMRect.top + window.pageYOffset;
+            window.scrollTo({
+            top: targetTop,
+            behavior: 'smooth'
+            });
+        }
+
+        function FlipCard(){
+        Next();
+        }
+        function Next(){
+        if(count == 18){
+            count = -1;
+            document.getElementById("MainElement").innerHTML = ""
+            Next();
+        }
+        else{
+            count += 1;
+            document.getElementById("MainElement").innerHTML = document.getElementById("MainElement").innerHTML + strarray[count] + "。";
+        }
+        Scroller()
+        }
+        Next();
+        function Prev(){
+            if(count == -1){
+                count = 0;
+            }
+            else{
+                count = count - 1;
+                document.getElementById("MainElement").innerHTML="";
+                for(let i = 0; i <= count; i++){
+                    //console.log(i);
+                    document.getElementById("MainElement").innerHTML = document.getElementById("MainElement").innerHTML + strarray[i] + "。";
+                }
+            }
+            Scroller()
+        }
+
+        </script>
+    </body>
+</html>
