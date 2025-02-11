@@ -1,130 +1,246 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title id="Title"></title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+        <meta charset="UTF-8">
     </head>
     <body>
-        <div id="title">問題</div>
-        <div id="ProblemDisp">問題文</div>
-        <canvas id="canvas" width="500" height="100"></canvas>
-        <div id="Correct">模範解答</div>
-        <br>
-        <button id="AnswerDisp" onclick="ShowAns()">答えを見る</button>
-        <button id="Next" onclick="ProblemGUIReady()">次へ</button>
+    諸般の事情で、このページは廃止になりました。    
+        <!--
+        <div id="Container">
+            <div id="Progress">e/e</div>
+            <div id="Question_Answer" onclick="Flip()">QA</div>
+            <button id="Next" onclick="NavigateQuestion(1)">次へ</button>
+            <button id="Back" onclick="NavigateQuestion(-1)">前へ</button>
+        </div>
+        <script>
+            /* Question = ["	アサリは何類か。	",
+                            "	アブの変態は?	",
+                            "	アブは何目か。	",
+                            "	アメフラシは何類か。	",
+                            "	アメンボの変態は?	",
+                            "	アメンボは何目か。	",
+                            "	アリの変態は?	",
+                            "	アリは何目か。	",
+                            "	アワビは何類か。	",
+                            "	イカは何類か。	",
+                            "	ウミウシは何類か。	",
+                            "	エビは何類か。	",
+                            "	オウムガイは何類か。	",
+                            "	カイミジンコは何類か。	",
+                            "	カニは何類か。	",
+                            "	カの変態は?	",
+                            "	ガの変態は?	",
+                            "	カは何目か。	",
+                            "	ガは何目か。	",
+                            "	カブトムシの変態は?	",
+                            "	カブトムシは何目か。	",
+                            "	カマキリの変態は?	",
+                            "	カマキリは何目か。	",
+                            "	カメムシの変態は?	",
+                            "	カメムシは何目か。	",
+                            "	クモは何類か。	",
+                            "	クワガタの変態は?	",
+                            "	クワガタは何目か。	",
+                            "	コウロギの変態は?	",
+                            "	コウロギは何目か。	",
+                            "	ゴカイは何類か。	",
+                            "	サザエは何類か。	",
+                            "	サソリは何類か。	",
+                            "	ザリガニは何類か。	",
+                            "	セミの変態は?	",
+                            "	セミは何目か。	",
+                            "	タコは何類か。	",
+                            "	ダンゴムシは何類か。	",
+                            "	チョウの変態は?	",
+                            "	チョウは何目か。	",
+                            "	トンボの変態は?	",
+                            "	トンボは何目か。	",
+                            "	ナイカジは何類か。	",
+                            "	ノミの変態は?	",
+                            "	ノミは何目か。	",
+                            "	ハエの変態は?	",
+                            "	ハエは何目か。	",
+                            "	ハチの変態は?	",
+                            "	ハチは何目か。	",
+                            "	バッタの変態は?	",
+                            "	バッタは何目か。	",
+                            "	ヒルは何類か。	",
+                            "	フジツボは何類か。	",
+                            "	ホタテは何類か。	",
+                            "	マイマイは何類か。	",
+                            "	ミミズは何類か。	",
+                            "	ヤドカリは何類か。	"];
+            let Answer = ["	斧足類	",
+                        "	完全	",
+                        "	双翅目	",
+                        "	腹足類	",
+                        "	不完全	",
+                        "	半翅目	",
+                        "	完全	",
+                        "	膜翅目	",
+                        "	腹足類	",
+                        "	頭足類	",
+                        "	腹足類	",
+                        "	甲殻類	",
+                        "	頭足類	",
+                        "	甲殻類	",
+                        "	甲殻類	",
+                        "	完全	",
+                        "	完全	",
+                        "	双翅目	",
+                        "	鱗翅目	",
+                        "	完全	",
+                        "	甲虫目	",
+                        "	不完全	",
+                        "	カマキリ目	",
+                        "	不完全	",
+                        "	半翅目	",
+                        "	クモ型類	",
+                        "	完全	",
+                        "	甲虫目	",
+                        "	不完全	",
+                        "	直翅目	",
+                        "	多毛類	",
+                        "	腹足類	",
+                        "	クモ型類	",
+                        "	クモ型類	",
+                        "	不完全	",
+                        "	半翅目	",
+                        "	頭足類	",
+                        "	甲殻類	",
+                        "	完全	",
+                        "	鱗翅目	",
+                        "	不完全	",
+                        "	トンボ目	",
+                        "	腹足類	",
+                        "	完全	",
+                        "	ノミ目	",
+                        "	完全	",
+                        "	双翅目	",
+                        "	完全	",
+                        "	膜翅目	",
+                        "	不完全	",
+                        "	直翅目	",
+                        "	多毛類	",
+                        "	甲殻類	",
+                        "	斧足類	",
+                        "	腹足類	",
+                        "	貧毛類	",
+<<<<<<< HEAD
+                        "	甲殻類	"];*/
+            var test = {"ab":["CD","DE"]}
+            console.log(test)
+            let ProblemsQuery;
+            const URLParamCurs = new URLSearchParams(window.location.search);
+            const ProblemsQueryAddress = URLParamCurs.get("SolveFile");
+            fetch(ProblemsQueryAddress).then((data) => {
+                ProblemsQueryOld = data.text();
+            })
+            .then(() => {
+                AfterReaded();
+                AfterReaded();
+            })
+            const AfterReaded = function(){
+                let NowQuestionNumber = 0;
+                let IsFlipped = false;
+                ProblemsQueryOld.then((data2) => {var temp1 = JSON.parse(data2 + "");ProblemsQuery = temp1;console.log(temp1);});
+                console.log(ProblemsQuery)
+                const Question = ProblemsQuery.Answer;
+                const QuestionField = document.getElementById("Question_Answer")
+                const Progress = document.getElementById("Progress")
+                function Flip() {
+                    if(IsFlipped == false){
+                    IsFlipped = true;
+                    QuestionField.innerText = Answer[NowQuestionNumber];
+                    }
+                    else if(IsFlipped == true){
+                        IsFlipped = false;
+                        QuestionField.innerText = Question[NowQuestionNumber];
+                    }
+                }
+            const URLParamCurs = new URLSearchParams(window.location.search);
+            const ProblemsQueryAddress = URLParamCurs.get("SolveFile");
+            const ProblemsQueryRaw = fetch(ProblemsQueryAddress,{method:"GET"});
+            const ProblemsQuery = JSON.parse(ProblemsQueryRaw);
+            console.log(ProblemsQueryRaw);
+            let NowQuestionNumber = 0;
+            let IsFlipped = false;
+            const QuestionField = document.getElementById("Question_Answer")
+            const Progress = document.getElementById("Progress")
+            function Flip() {
+                if(IsFlipped == false){
+                IsFlipped = true;
+                QuestionField.innerText = Answer[NowQuestionNumber];
+                }
+                function NavigateQuestion(type){
+                    if(type == 1){
+                        if(NowQuestionNumber == Question.length-1){}else{
+                            NowQuestionNumber = NowQuestionNumber + 1;
+                            Refresh();
+                        }
+                    }
+                    else if(type == -1){
+                        if(NowQuestionNumber == 0){}else{
+                            NowQuestionNumber = NowQuestionNumber - 1;
+                            Refresh();
+                        }
+                    }
+                }
+                function Refresh(){
+                    QuestionField.innerText = Question[NowQuestionNumber];
+                    Progress.innerText = (NowQuestionNumber+1)+"/"+Question.length
+                }
+                Refresh()
+            }
+        
+        </script>-->
         <style>
-            #title{
-                font-size:2rem;
+            #Container{
+                display: grid;
+                grid-template-columns: 5vw 30vw 30vw 30vw 5vw;
+                grid-template-rows: 5vh 5vh 70vh 5vh 10vh 5vh;
             }
-            #ProblemDisp{
-                font-size:1rem;
-            }
-            #canvas{
-                border:2px solid #000000;
-                border-radius:7px;
-            }
-            #Correct{
-                font-size:1rem;
-            }
-            #AnswerDisp{
-                width:25vw;
-                height: 10vh;
+            #Question_Answer{
+                grid-row: 3/4;
+                grid-column: 2/5;
                 background-color: whitesmoke;
+                border-radius: 2px;
+                border:1px black solid;
+                text-align: center;
+                font-size: 6rem;
+            }
+            #Back{
+                grid-row: 5/6;
+                grid-column: 2/3;
+                background-color: whitesmoke;
+                border-radius: 2px;
+                border:1px black solid;
+                font-size: 6rem;
+                font-family: "Noto Sans JP",sans-serif;
             }
             #Next{
-                width:25vw;
-                height: 10vh;
+                grid-row: 5/6;
+                grid-column: 4/5;
                 background-color: whitesmoke;
+                border-radius: 2px;
+                border: 1px black solid;
+                font-size: 6rem;
+                font-family: "Noto Sans JP",sans-serif;
+            }
+            #Progress{
+                grid-row: 2/3;
+                grid-column: 2/5;
+                text-align: center;
+                font-size: 4rem;
+            }
+            body{
+                background-color: white;
+                margin:0px;
+                font-family: "Noto Sans JP",sans-serif;
             }
         </style>
-        <script>
-            const canvas = document.getElementById("canvas");
-            const context = canvas.getContext("2d");
-            const clearButton = document.getElementById("clear");
-            let isDragging = false;
-            let lastPosition = { x: null, y: null };
-            function draw(x, y) {
-            if (!isDragging) {
-                return;
-            }
-            context.lineCap = "round";
-            context.lineWidth = 3;
-            context.strokeStyle = "black";
-            if (lastPosition.x === null || lastPosition.y === null) {
-                context.moveTo(x, y);
-            } else {
-                context.moveTo(lastPosition.x, lastPosition.y);
-            }
-            context.lineTo(x, y);
-            context.stroke();
-            lastPosition.x = x;
-            lastPosition.y = y;
-            }
-            function dragStart(event) {
-            context.beginPath();
-            isDragging = true;
-            }
-            function dragEnd(event) {
-            context.closePath();
-            isDragging = false;
-            lastPosition.x = null;
-            lastPosition.y = null;
-            }
-            function clear() {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            }
-            function init() {
-            canvas.addEventListener("mousedown", dragStart);
-            canvas.addEventListener("mouseup", dragEnd);
-            canvas.addEventListener("mouseout", dragEnd);
-            canvas.addEventListener("mousemove", (e) => {
-                draw(
-                e.layerX - canvas.getBoundingClientRect().left,
-                e.layerY - canvas.getBoundingClientRect().top
-                );
-            });
-            canvas.addEventListener("touchstart", dragStart);
-            canvas.addEventListener("touchcancel", dragEnd);
-            canvas.addEventListener("touchend", dragEnd);
-            canvas.addEventListener("touchmove", (e) => {
-                e.preventDefault();
-
-                let x = e.touches[0].clientX - canvas.getBoundingClientRect().left;
-                let y = e.touches[0].clientY - canvas.getBoundingClientRect().top;
-
-                draw(x, y);
-            });
-            }
-            init();
-            let NowQuestionNumber = -1;
-            function ProblemGUIReady(){
-                NowQuestionNumber = NowQuestionNumber + 1;
-                document.getElementById("Next").hidden = true;
-                document.getElementById("AnswerDisp").hidden = false;
-                document.getElementById("Correct").hidden = true;
-                document.getElementById("Correct").innerText = ApplicationIndex.Problems[NowQuestionNumber].Answer[0].Answer+ApplicationIndex.Problems[NowQuestionNumber].Answer[0].Unit;
-                document.getElementById("ProblemDisp").innerText = ApplicationIndex.Problems[NowQuestionNumber].Sentence;
-            }
-            function ShowAns(){
-                document.getElementById("AnswerDisp").hidden = true;
-                document.getElementById("Correct").hidden = false;
-                document.getElementById("Next").hidden = false;
-                document.getElementById() 
-            }
-            let url = new URL(window.location.href);
-            let params = url.searchParams;
-            ProblesSetID = params.get('ProblemsSetID');
-            let ApplicationIndex = {};
-            fetch("https://fukukuro.github.io/Kurolingo/Problems/"+ProblesSetID+".json")
-            .then((data) => data.json())
-            .then((res) => {
-                ApplicationIndex = res;
-                console.log(ApplicationIndex.Problems);
-                ProblemGUIReady(0);
-            });
-        </script>
     </body>
 </html>
