@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="Splash" hidden>
+            <div id="Loading">読み込み中...</div>
+            アプリの製作者:CoffeeOwl;<br>
+            無断で他人にアプリをコピーしないでください。;
+        </div>
+        <main id="Main" hidden>
+        四面楚歌暗記
+        <button id="MainElement" onclick="FlipCard()"></button>
+        <button id="prev" onclick="Prev()">前へ</button>
+        <button id="next" onclick="Next()">次へ</button>
+        </main>
+        <style>
+                    body{
+                        background-color: black;
+                    }
+        </style>
+        <style>
+            body{
+                background-color: black;
+                font-family: "M PLUS 1", serif;
+                font-size:80px;
+                text-align: center;
+                color: white;
+            }
+            #MainElement{
+                width: 100vw;
+                height:50vh;
+                margin: 0px;
+                padding: 5vw;
+                font-size:50px;
+                background-color: black;
+                color: white;
+                border-style: none;
+            }
+            #prev{
+                width:40vw;
+                margin: 0px;
+                padding: 5vw;
+                font-size:80px;
+                background-color: black;
+                color: white;
+                border-style: none;
+            }
+            #next{
+                width: 40vw;
+                margin: 0px;
+                padding: 5vw;
+                font-size:80px;
+                background-color: black;
+                color: white;
+                border-style: none;
+            }
+            #FLD_ALL{
+                color:white;
+            }
+            #Splash{
+                width: 100vw;
+                height: 60vh;
+                color:white;
+                font-size:40px;
+                padding-top: 40vh;
+            }
+            #Loading{
+                font-size: 80px;
+            }
+        </style>
+        <script>
+        document.getElementById("Splash").hidden = false;
+                    setTimeout(() => {
+                        document.getElementById("Main").hidden = false;
+                        document.getElementById("Splash").hidden = true;
+                    }, 3000);
+        //alert("タイムアウト処理完了");
+        const orgstr = `<ruby>項王<rt>こうおう</rt></ruby>の<ruby>軍<rt>ぐん</rt></ruby><ruby>垓下<rt>がいか</rt></ruby>に<ruby>壁<rt>へき</rt></ruby>す。
+<ruby>兵<rt>へい</rt></ruby><ruby>少<rt>すく</rt></ruby>なく<ruby>食<rt>しょく</rt></ruby><ruby>尽<rt>つ</rt></ruby>く。
+<ruby>漢軍<rt>かんぐん</rt></ruby>および<ruby>諸侯<rt>しょこう</rt></ruby>の<ruby>兵<rt>へい</rt></ruby>、
+<ruby>之<rt>これ</rt></ruby>を<ruby>囲<rt>かこ</rt></ruby>むこと<ruby>数重<rt>すうちょう</rt></ruby>なり。
+<ruby>夜<rt>よる</rt></ruby><ruby>漢軍<rt>かんぐん</rt></ruby>の<ruby>四面楚歌<rt>しめんそか</rt></ruby>するを<ruby>聞<rt>き</rt></ruby>き、
+<ruby>項王<rt>こうおう</rt></ruby><ruby>乃<rt>すなわ</rt></ruby>ち<ruby>大<rt>おお</rt></ruby>いに<ruby>驚<rt>おどろ</rt></ruby>きて<ruby>曰<rt>い</rt></ruby>はく
+「<ruby>漢<rt>かん</rt></ruby><ruby>皆<rt>みな</rt></ruby><ruby>己<rt>すで</rt></ruby>に<ruby>楚<rt>そ</rt></ruby>を<ruby>得<rt>え</rt></ruby>たるか。
+<ruby>是<rt>こ</rt></ruby>れ<ruby>何<rt>なん</rt></ruby>ぞ<ruby>楚人<rt>そひと</rt></ruby>の<ruby>多<rt>おお</rt></ruby>きや。」と`;
+        //alert("文章読み込み完了、");
+
+        let count = -1;
+        const strarray = orgstr.split("。");
+        function Scroller(){
+            const element = document.getElementById('next');
+            const targetDOMRect = element.getBoundingClientRect();
+            const targetTop = targetDOMRect.top + window.pageYOffset;
+            window.scrollTo({
+            top: targetTop,
+            behavior: 'smooth'
+            });
+        }
+
+        function FlipCard(){
+        Next();
+        }
+        function Next(){
+        if(count == 5){
+            count = -1;
+            document.getElementById("MainElement").innerHTML = ""
+            Next();
+        }
+        else{
+            count += 1;
+            document.getElementById("MainElement").innerHTML = document.getElementById("MainElement").innerHTML + strarray[count] + "。";
+        }
+        Scroller()
+        }
+        Next();
+        function Prev(){
+            if(count == -1){
+                count = 0;
+            }
+            else{
+                count = count - 1;
+                document.getElementById("MainElement").innerHTML="";
+                for(let i = 0; i <= count; i++){
+                    //console.log(i);
+                    document.getElementById("MainElement").innerHTML = document.getElementById("MainElement").innerHTML + strarray[i] + "。";
+                }
+            }
+            Scroller()
+        }
+
+        </script>
+    </body>
+</html>
