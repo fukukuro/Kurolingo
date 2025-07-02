@@ -11,12 +11,12 @@
   </style>
 </head>
 <body>
-  <h1>QRコードリーダー</h1>
+  <h1>QRコードリーダーV2</h1>
   <video id="video" autoplay></video>
   <canvas id="canvas" hidden></canvas>
   <p>読み取ったQRコード: <span id="output">なし</span></p>
 
-  <script src="https://cdn.jsdelivr.net/npm/jsqr/distcript>
+  <script src="https://unpkg.com/jsqr@1.4.0/dist/jsQR.js">
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const output = document.getElementById('output');
