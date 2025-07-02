@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>QRコードリーダー</title>
+  <style>
+    video, canvas {
+      width: 100%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <h1>QRコードリーダー</h1>
+  <video id="video" autoplay></video>
+  <canvas id="canvas" hidden></canvas>
+  <p>読み取ったQRコード: <span id="output">なし</span></p>
+
+  <script src="https://cdn.jsdelivr.net/npm/jsqr/distcript>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const output = document.getElementById('output');
+    const context = canvas.getContext('2d');
+
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+      .then(stream => {
+        video.srcObject = stream;
+        video.setAttribute("playsinline", true); // iOS対応
+        requestAnimationFrame(scanQRCode);
+      });
+
+    function scanQRCode() {
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height);
+        = code.data;
+        }
+      }
+      requestAnimationFrame(scanQRCode);
+    }
+  </script>
+</body>
+</html>
